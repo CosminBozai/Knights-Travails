@@ -1,4 +1,6 @@
-export default function constructBoard(arr) {
+const squareArr = [];
+
+function constructBoard() {
   const chessboard = document.getElementById("chessboard");
   let alternate = true;
   let x = 0;
@@ -27,13 +29,13 @@ export default function constructBoard(arr) {
     } else {
       square.element.className = "square black";
     }
-    square.element.setAttribute(
-      "coords",
-      `x = ${square.xPos} y = ${square.yPos}`
-    );
+    square.element.setAttribute("Pos-x", square.xPos);
+    square.element.setAttribute("Pos-y", square.yPos);
 
     alternate = !alternate;
     chessboard.appendChild(square.element);
-    arr.push(square);
+    squareArr.push(square);
   }
 }
+
+export { constructBoard, squareArr };

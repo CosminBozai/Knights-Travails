@@ -1,6 +1,5 @@
-import constructBoard from "./board";
-const squareArr = [];
-constructBoard(squareArr);
+import { constructBoard, squareArr } from "./board";
+constructBoard();
 
 const knight = (() => {
   let element = document.getElementById("knight");
@@ -19,3 +18,13 @@ const knight = (() => {
   }
   return { moveKnight };
 })();
+
+squareArr.forEach((square) => {
+  square.element.addEventListener("click", selectSquare);
+});
+
+function selectSquare() {
+  let x = this.getAttribute("Pos-x");
+  let y = this.getAttribute("Pos-y");
+  knight.moveKnight(x, y);
+}
