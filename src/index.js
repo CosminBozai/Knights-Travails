@@ -1,25 +1,21 @@
-const chessboard = document.getElementById("chessboard");
+import constructBoard from "./board";
+const squareArr = [];
+constructBoard(squareArr);
 
-(function constructBoard() {
-  let alternate = true;
-  for (let i = 0; i < 64; i++) {
-    let square = document.createElement("div");
-    if (i % 8 === 0 && i !== 0) {
-      alternate = !alternate;
+const knight = (() => {
+  let element = document.getElementById("knight");
+  function moveKnight(x, y) {
+    if (x > 8 && y > 8) {
+      return alert("The knight can move only on the 8x8 board");
     }
-    if (i % 8 === 0) {
-      square.textContent = i / 8 + 1;
-    }
-    if (i < 8) {
-      square.textContent = i + 1;
-    }
-    if (alternate === true) {
-      square.className = "square white";
-    } else {
-      square.className = "square black";
-    }
-
-    alternate = !alternate;
-    chessboard.appendChild(square);
+    // 6.25% is the distance the knight has to be from the board's margin to be...
+    // ...in the middle of the 1, 1 square.
+    // The formula for moving to the center of other squares is...
+    // ... Sn = 6.25 * (n + n - 1), where Sn is the target square
+    let newXPos = 6.25 * (2 * x - 1);
+    let newYPos = 6.25 * (2 * y - 1);
+    element.style.left = `${newXPos}%`;
+    element.style.top = `${newYPos}%`;
   }
+  return { moveKnight };
 })();
